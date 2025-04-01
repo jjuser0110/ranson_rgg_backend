@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
                 'name'     => 'Agent',
                 'username'     => 'agent',
                 'email'     => 'agent@gmail.com',
-                'password'     => Hash::make('admin99999'),
+                'password'     => Hash::make('agent99999'),
             ];
             $user = User::create($data);
         }
