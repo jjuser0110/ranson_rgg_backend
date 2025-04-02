@@ -25,10 +25,14 @@
 										<thead>
 											<tr>
 												<th>Transaction No</th>
+                                                <th>Date</th>
+                                                <th>Member Name</th>
+                                                <th>Payment</th>
 												<th>Product</th>
 												<th>Price</th>
 												<th>QTY</th>
 												<th>Amount</th>
+                                                <th>Status</th>
 												@if(Auth::user()->username == "admin")
 												<th>Actions</th>
 												@endif
@@ -38,10 +42,14 @@
 												@foreach($transaction as $u)
 											<tr>
 												<td>{{$u->inv_no??''}}</td>
+                                                <td>{{$u->datetime??''}}</td>
+                                                <td>{{$u->user->name??''}}</td>
+                                                <td>{{$u->payment??''}}</td>
 												<td>{{$u->product_variant->name??''}}</td>
 												<td>{{$u->cost??''}}</td>
 												<td>{{$u->qty??''}}</td>
 												<td>{{$u->amount??''}}</td>
+                                                <td>{{$u->status??''}}</td>
 												@if(Auth::user()->username == "admin")
 												<td>
                                                     <button class="btn btn-sm btn-info" onclick="window.location.href='{{ route('transaction.view',$u) }}'">
@@ -88,7 +96,7 @@
 									@endforeach
 								</select >
                                 <label class="form-label" for="exampleInputEmail1">Payment</label>
-								<input type="text" class="form-control" name="payment" id="payment"  placeholder="Enter Payment" required>
+								<input type="text" class="form-control" name="payment" id="payment"  placeholder="Digi/Celcom/RGG" required>
 								<label class="form-label" for="exampleInputEmail1">Product</label>
 								<select class="form-control" name="product_variant_id" id="product_variant_id">
 									<option value = "">-- select --</option>

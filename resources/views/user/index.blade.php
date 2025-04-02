@@ -24,6 +24,8 @@
 						<thead>
 							<tr>
 								<th>Username</th>
+                                <th>User ID</th>
+                                <th>Name</th>
 								<th>Email</th>
 								<th>Status</th>
 								@if(Auth::user()->username == "admin")
@@ -35,6 +37,8 @@
 								@foreach($users as $u)
 							<tr>
 								<td>{{$u->username??''}}</td>
+                                <td>{{$u->userid??''}}</td>
+                                <td>{{$u->name??''}}</td>
 								<td>{{$u->email??''}}</td>
 								<td>
                                     @if ($u->is_active)
