@@ -17,7 +17,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    
+
     public function monthly_invoice()
     {
         $now = Carbon::now();
@@ -27,5 +27,28 @@ class Controller extends BaseController
         //dd($year);
         GenerateInvoice::dispatch($month,$year,$now);
         return true;
+    }
+
+    public function upload($file, $module, $moduleId)
+    {
+	    if (!empty($file)) {
+            $filenameWithExt = $file->getClientOriginalName();
+
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+
+            $extension = $file->getClientOriginalExtension();
+
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+
+            $latest_filename = $moduleId."/".$fileNameToStore;
+
+            $path = $file->storeAs($module,$latest_filename,'public');
+
+            return [
+                'file_name' => $fileNameToStore,
+                'file_path' => $path,
+                'file_type' => $extension
+            ];
+	    }
     }
 }

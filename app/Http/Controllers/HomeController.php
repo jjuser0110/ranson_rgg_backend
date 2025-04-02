@@ -13,6 +13,7 @@ use App\Models\Payment;
 use App\Models\RentCard;
 use App\Models\Rent;
 use App\Models\Expense;
+use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -38,7 +39,22 @@ class HomeController extends Controller
             $filter = $now->format('Y-m');
         }
 
+        $total_member = User::whereNotNull('userid')->count();
+
+        $today_transactions = Transaction::whereDate('datetime', $now);
+        $today_sales = $today_transactions->sum('amount');
+        $today_order = $today_transactions->count();
+
+        $this_month_transactions = Transaction::whereMonth('datetime', $now);
+        $this_month_sales = $this_month_transactions->sum('amount');
+        $this_month_order = $this_month_transactions->count();
+
         $data = [
+            'total_member' => $total_member,
+            'today_sales' => $today_sales,
+            'today_order' => $today_order,
+            'this_month_sales' => $this_month_sales,
+            'this_month_order' => $this_month_order,
         ];
 
         $today = Carbon::now();

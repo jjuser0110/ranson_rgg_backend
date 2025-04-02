@@ -13,7 +13,7 @@
 		<div class="card">
 			<div class="card-header">
 				<div class="card-title">Table List</div>
-				
+
 				@if(Auth::user()->username == "admin")
 				<a class="btn btn-primary" onclick="openModal()" style="float:right;color:white">Create</a>
 				@endif
@@ -36,8 +36,13 @@
 							<tr>
 								<td>{{$u->username??''}}</td>
 								<td>{{$u->email??''}}</td>
-								<td><div class="btn btn-sm" style="background-color:green;color:white">Active</div></td>
-								
+								<td>
+                                    @if ($u->is_active)
+                                        <div class="btn btn-sm" style="background-color:green;color:white" onclick="if(confirm('Are you sure you want to inactive this user?')){ window.location.href='{{ route('user.setInactive',$u) }}' }">Active</div>
+                                    @else
+                                        <div class="btn btn-sm" style="background-color:green;color:white" onclick="if(confirm('Are you sure you want to active this user?')){ window.location.href='{{ route('user.setActive',$u) }}' }">Inactive</div>
+                                    @endif
+                                </td>
 								@if(Auth::user()->username == "admin")
 								<td>
 								<button class="btn btn-sm btn-info" onclick="editModal({{$u}})">
@@ -47,7 +52,7 @@
 									Reset Pass
 								</button>
 								@endif
-									
+
 								</td>
 							</tr>
 								@endforeach
@@ -76,6 +81,14 @@
 					<label class="form-label" for="exampleInputEmail1">Username</label>
 					<input type="text" class="form-control" name="username" id="username"  placeholder="Enter Username" required>
 				</div>
+                <div class="form-group">
+					<label class="form-label" for="exampleInputEmail1">User ID</label>
+					<input type="text" class="form-control" name="userid" id="userid"  placeholder="Enter User  ID" required>
+				</div>
+                <div class="form-group">
+					<label class="form-label" for="exampleInputEmail1">Name</label>
+					<input type="text" class="form-control" name="name" id="name"  placeholder="Enter Name" required>
+				</div>
 				<div class="form-group">
 					<label class="form-label" for="exampleInputEmail1">Email</label>
 					<input type="text" class="form-control" name="email" id="email"  placeholder="Enter Email" required>
@@ -96,20 +109,24 @@
 
 <script>
 	function openModal(){
-		
+
 		$("#largeModal").modal();
 		document.getElementById("user_id").value='';
 		document.getElementById("username").value='';
+        document.getElementById("userid").value='';
+        document.getElementById("name").value='';
 		document.getElementById("email").value='';
 		document.getElementById("password").style.display = "block";
 		document.getElementById("password").value='';
 
 	}
 	function editModal(data){
-		
+
 		$("#largeModal").modal();
 		document.getElementById("user_id").value=data.id;
 		document.getElementById("username").value=data.username;
+        document.getElementById("userid").value=data.userid;
+        document.getElementById("name").value=data.name;
 		document.getElementById("email").value=data.email;
 		document.getElementById("password").style.display = "none";
 		document.getElementById("password").required=false;

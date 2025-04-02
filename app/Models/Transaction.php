@@ -10,14 +10,24 @@ class Transaction extends Model
 {
     use HasFactory, SoftDeletes;
 
-    
+
     protected $fillable = [
         'transaction_no',
+        'datetime',
+        'user_id',
         'product_variant_id',
         'cost',
         'qty',
         'amount',
+        'payment',
+        'status',
+        'bank_receipt'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 
     public function product_variant()
     {

@@ -16,8 +16,8 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::whereNull('name')->get();
-        
+        $users = User::whereNotNull('userid')->get();
+
         return view('user.index')->with('users',$users);
     }
 
@@ -41,9 +41,9 @@ class UserController extends Controller
             // dd($request->all());
             $request->merge(['password'=>Hash::make($request->password)]);
             //dd($request->all());
-            $user=User::create($request->all());  
-        }  
-        
+            $user=User::create($request->all());
+        }
+
         return redirect()->back();
     }
 
@@ -64,7 +64,7 @@ class UserController extends Controller
                         $approve_cost+=$row1->cards->where('is_approved',1)->sum('cost');
                     }
                 }
-                
+
                 $count+=$row->cards->count();
                 $approve_count+=$row->cards->where('is_approved',1)->count();
                 $cost+=$row->cards->sum('cost');
@@ -75,7 +75,7 @@ class UserController extends Controller
         $approve_count+=$user->cards->where('is_approved',1)->count();
         $cost+=$user->cards->sum('cost');
         $approve_cost+=$user->cards->where('is_approved',1)->sum('cost');
-        
+
         return view('user.view')->with('user',$user)->with('bank',$bank)->with('count',$count)->with('cost',$cost)->with('approve_count',$approve_count)->with('approve_cost',$approve_cost);
     }
 
@@ -85,7 +85,7 @@ class UserController extends Controller
 
         return redirect()->back();
     }
-   
+
 
     public function setInactive(User $user)
     {

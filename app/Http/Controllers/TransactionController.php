@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\ProductVariant;
 use App\Models\Transaction;
+use App\Models\User;
 use Carbon\Carbon;
 
 class TransactionController extends Controller
@@ -16,27 +17,36 @@ class TransactionController extends Controller
     {
         $transaction = Transaction::all();
         $product_variant = ProductVariant::all();
-        
-        return view('transaction.index')->with('transaction',$transaction)->with('product_variant',$product_variant);
+        $users = User::whereNotNull('userid')->get();
+
+        return view('transaction.index')->with('transaction',$transaction)->with('product_variant',$product_variant)->with('users', $users);
     }
 
     public function store(Request $request)
     {
         // dd($request->all());
-        $transaction=Transaction::create($request->all());  
-        
+        $transaction=Transaction::create($request->all());
+
+        if (isset($request->file_attachment)) {
+            $upload = $this->upload($request->file_attachment, 'transaction', $transaction->id);
+            $transaction->update([
+                'bank_receipt' => $upload['file_path']
+            ]);
+        }
+
         return redirect()->route('transaction.index');
     }
 
-    public function destroy(Bank $bank)
+    public function view(Transaction $transaction)
     {
-        if($bank->cards->count()==0){
-            $bank->delete();
-            return redirect()->route('bank.index');
-        }else{
-            return redirect()->back()->withErrors("Bank in used. cannot be delete!");
-        }
 
+        return view('transaction.view', compact('transaction'));
     }
-   
+
+    public function destroy(Transaction $transaction)
+    {
+        $transaction->delete();
+        return redirect()->route('transaction.index');
+    }
+
 }
