@@ -39,7 +39,11 @@
                                         <td>{{ $transaction->datetime }}</td>
                                     </tr>
                                     <tr>
-                                        <td><strong>Member Name :</strong></td>
+                                        <td><strong>User ID :</strong></td>
+                                        <td>{{ $transaction->user->userid ?? '' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>User Name :</strong></td>
                                         <td>{{ $transaction->user->name ?? '' }}</td>
                                     </tr>
                                     <tr>
