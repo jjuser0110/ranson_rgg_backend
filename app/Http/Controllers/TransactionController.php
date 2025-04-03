@@ -15,7 +15,7 @@ class TransactionController extends Controller
 {
     public function index(Request $request)
     {
-        $transaction = Transaction::all();
+        $transaction = Transaction::orderBy('datetime', 'DESC')->orderBy('id', 'DESC')->get();
         $product_variant = ProductVariant::all();
         $users = User::whereNotNull('userid')->get();
 

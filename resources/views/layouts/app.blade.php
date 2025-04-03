@@ -12,7 +12,7 @@
       <!-- site icon -->
       <!-- <link rel="icon" href="images/fevicon.png" type="image/png" /> -->
       <!-- bootstrap css -->
-	  
+
 	  <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
       <!-- site css -->
 	  <link rel="stylesheet" href="{{ asset('style.css') }}">
@@ -58,11 +58,11 @@
                      <li><a href="{{ route('user.index') }}"><i class="fa fa-user blue2_color"></i> <span>User</span></a></li>
                      <li><a data-toggle="modal" data-target="#changePassModal" style="cursor:pointer"><i class="fa fa-key"></i> <span>Change Password</span></a></li>
                      <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i> <span>{{ __('Logout') }}</span></a></li>
-                     
+
                      <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
                      </form>
-                     
+
                   </ul>
                </div>
             </nav>
@@ -107,11 +107,11 @@
                <!-- dashboard inner -->
                <div class="midde_cont">
                   <div class="container-fluid">
-                     
+
 					@include('layouts.flash-message')
 					@yield('content')
                      <!-- graph -->
-                     
+
                   </div>
 			<div id="changePassModal" class="modal fade">
 				<div class="modal-dialog modal-md" role="document">
@@ -160,7 +160,7 @@
 				</div><!-- modal-dialog -->
 			</div>
                   <!-- footer -->
-                  
+
                </div>
                <!-- end dashboard inner -->
             </div>
@@ -192,5 +192,7 @@
       <!-- custom js -->
         <script src="{{ asset('js/custom.js') }}"></script>
         <!-- <script src="{{ asset('js/chart_custom_style1.js') }}"></script> -->
+
+        @yield('scripts')
    </body>
 </html>

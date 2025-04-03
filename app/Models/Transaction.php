@@ -21,7 +21,8 @@ class Transaction extends Model
         'amount',
         'payment',
         'status',
-        'bank_receipt'
+        'bank_receipt',
+        'player_id'
     ];
 
     public function user()
