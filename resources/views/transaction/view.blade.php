@@ -47,6 +47,10 @@
                                         <td>{{ $transaction->user->name ?? '' }}</td>
                                     </tr>
                                     <tr>
+                                        <td><strong>Player ID :</strong></td>
+                                        <td>{{ $transaction->player_id ?? '' }}</td>
+                                    </tr>
+                                    <tr>
                                         <td><strong>Payment :</strong></td>
                                         <td>{{ $transaction->payment ?? '' }}</td>
                                     </tr>
