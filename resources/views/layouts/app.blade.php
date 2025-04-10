@@ -55,6 +55,7 @@
                   <ul class="list-unstyled components">
                      <li><a href="{{ route('home') }}"><i class="fa fa-dashboard yellow_color"></i> <span>Dashboard</span></a></li>
                      <li><a href="{{ route('transaction.index') }}"><i class="fa fa-table purple_color2"></i> <span>Transactions</span></a></li>
+                     <li><a href="{{ route('withdraw.index') }}"><i class="fa fa-table purple_color2"></i> <span>Withdraw</span></a></li>
                      <li><a href="{{ route('user.index') }}"><i class="fa fa-user blue2_color"></i> <span>User</span></a></li>
                      <li><a data-toggle="modal" data-target="#changePassModal" style="cursor:pointer"><i class="fa fa-key"></i> <span>Change Password</span></a></li>
                      <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i> <span>{{ __('Logout') }}</span></a></li>

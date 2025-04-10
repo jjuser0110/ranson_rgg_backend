@@ -18,7 +18,11 @@
     <div class="col-lg-5 col-xl-4">
         <div class="card card-profile cover-image "  data-image-src="{{ asset('assets/images/photos/gradient3.jpg') }}">
             <div class="card-body text-center">
-                <img class="card-profile-img" src="{{ asset('storage/' . $transaction->bank_receipt)}} " alt="img">
+                @if ($transaction->bank_receipt)
+                    <img class="card-profile-img" src="{{ asset('storage/' . $transaction->bank_receipt)}} " alt="img">
+                @else
+                    No receipt
+                @endif
             </div>
         </div>
     </div>
