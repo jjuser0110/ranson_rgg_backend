@@ -14,6 +14,7 @@ class Withdraw extends Model
     protected $fillable = [
         'date',
         'reference_no',
+        'name',
         'user_id',
         'bank',
         'bank_acc',

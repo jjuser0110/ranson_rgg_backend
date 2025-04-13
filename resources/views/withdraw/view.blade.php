@@ -44,6 +44,10 @@
                                         <td>{{ $withdraw->date }}</td>
                                     </tr>
                                     <tr>
+                                        <td><strong>Name :</strong></td>
+                                        <td>{{ $withdraw->name }}</td>
+                                    </tr>
+                                    <tr>
                                         <td><strong>User ID :</strong></td>
                                         <td>{{ $withdraw->user->userid ?? '' }}</td>
                                     </tr>

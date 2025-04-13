@@ -26,6 +26,7 @@
                                 <tr>
                                     <th>Date</th>
                                     <th>Reference No</th>
+                                    <th>Name</th>
                                     <th>User ID</th>
                                     <th>User Name</th>
                                     <th>Bank</th>
@@ -42,6 +43,7 @@
                                     <tr>
                                         <td>{{ $withdraw->date ?? '' }}</td>
                                         <td>{{ $withdraw->ref_no ?? '' }}</td>
+                                        <td>{{ $withdraw->name ?? '' }}</td>
                                         <td>{{ $withdraw->user->userid ?? '' }}</td>
                                         <td>{{ $withdraw->user->name ?? '' }}</td>
                                         <td>{{ $withdraw->bank ?? '' }}</td>
@@ -90,6 +92,8 @@
                     <input type="date" class="form-control" name="date" id="date" value="{{ date('Y-m-d') }}" required>
                     <label class="form-label" for="exampleInputEmail1">Reference No</label>
                     <input type="text" class="form-control" name="reference_no" id="reference_no"  placeholder="Enter Reference No" required>
+                    <label class="form-label" for="exampleInputEmail1">Name</label>
+                    <input type="text" class="form-control" name="name" id="name"  placeholder="Enter Name" required>
                     <label class="form-label" for="exampleInputEmail1">User</label>
                     <select class="form-control" name="user_id" id="user_id">
                         <option value = "">-- Select --</option>
@@ -138,6 +142,7 @@
         document.getElementById("withdraw_id").value='';
         document.getElementById("date").value=date('Y-m-d');
         document.getElementById("reference_no").value='';
+        document.getElementById("name").value='';
         document.getElementById("user_id").value='';
         document.getElementById("bank").value='';
         document.getElementById("bank_acc").value='';
@@ -152,6 +157,7 @@
         document.getElementById("withdraw_id").value=data.id;
         document.getElementById("date").value=data.date;
         document.getElementById("reference_no").value=data.reference_no;
+        document.getElementById("name").value=data.name;
         document.getElementById("user_id").value=data.user_id;
         document.getElementById("bank").value=data.bank;
         document.getElementById("bank_acc").value=data.bank_acc;
